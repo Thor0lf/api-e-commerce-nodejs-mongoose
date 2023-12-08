@@ -7,6 +7,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 require("dotenv/config");
 const { MONGODB_HOST, MONGODB_DATABASE } = process.env;
 const MONGODB_URI = `mongodb+srv://${MONGODB_HOST}/${MONGODB_DATABASE}`;
-mongoose_1.default.connect(MONGODB_URI)
+mongoose_1.default
+    .connect(MONGODB_URI)
     .then(() => console.log(`Connecté à MongoDB`))
     .catch((err) => console.log(err));

@@ -27,13 +27,15 @@ const mongoose_1 = __importStar(require("mongoose"));
 const orderSchema = new mongoose_1.Schema({
     user: {
         type: mongoose_1.default.Types.ObjectId,
-        ref: 'User',
+        ref: "User",
         required: true,
         unique: true,
     },
-    products: [{
+    products: [
+        {
             type: mongoose_1.default.Types.ObjectId,
-            ref: 'Product',
-        }],
+            ref: "Product",
+        },
+    ],
 });
-exports.default = mongoose_1.default.model('Order', orderSchema);
+exports.default = mongoose_1.default.model("Order", orderSchema);

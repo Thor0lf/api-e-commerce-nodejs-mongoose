@@ -23,6 +23,7 @@ passport_1.default.use(new passport_jwt_1.Strategy(options, (jwtPayload, done) =
     try {
         const user = yield user_1.default.findById(jwtPayload.id);
         if (user) {
+            console.log(user._id);
             return done(null, user);
         }
         else {

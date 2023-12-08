@@ -3,11 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.handleValidationErrors = exports.validateRegisterInput = void 0;
 const express_validator_1 = require("express-validator");
 exports.validateRegisterInput = [
-    (0, express_validator_1.body)('email').isEmail().normalizeEmail(),
-    (0, express_validator_1.body)('password').matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
-        .withMessage('Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre, un symbole et faire au moins 8 caractères de long.'),
-    (0, express_validator_1.body)('firstname').isLength({ min: 2 }).withMessage('Le prénom est trop court.'),
-    (0, express_validator_1.body)('lastname').isLength({ min: 2 }).withMessage('Le nom est trop court.'),
+    (0, express_validator_1.body)("email").isEmail().normalizeEmail(),
+    (0, express_validator_1.body)("password")
+        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
+        .withMessage("Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre, un symbole et faire au moins 8 caractères de long."),
+    (0, express_validator_1.body)("firstname")
+        .isLength({ min: 2 })
+        .withMessage("Le prénom est trop court."),
+    (0, express_validator_1.body)("lastname").isLength({ min: 2 }).withMessage("Le nom est trop court."),
 ];
 const handleValidationErrors = (req, res, next) => {
     const errors = (0, express_validator_1.validationResult)(req);

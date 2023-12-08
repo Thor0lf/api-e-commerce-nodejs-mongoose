@@ -1,6 +1,6 @@
-import passport from 'passport';
-import { Strategy as JWTStrategy, ExtractJwt } from 'passport-jwt';
-import User from '../models/user';
+import passport from "passport";
+import { Strategy as JWTStrategy, ExtractJwt } from "passport-jwt";
+import User from "../models/user";
 
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -10,9 +10,10 @@ const options = {
 passport.use(
   new JWTStrategy(options, async (jwtPayload, done) => {
     try {
-      const user = await User.findById(jwtPayload.id);   
-         
+      const user = await User.findById(jwtPayload.id);
       if (user) {
+        console.log(user._id);
+        
         return done(null, user);
       } else {
         return done(null, false);

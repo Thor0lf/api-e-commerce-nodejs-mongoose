@@ -18,23 +18,29 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_1 = __importDefault(require("../models/user"));
 require("dotenv/config");
 const auth = express_1.default.Router();
-auth.post('/login', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+auth.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const JWT_SECRET = process.env.JWT_SECRET;
         const { email, password } = req.body;
         const user = yield user_1.default.findOne({ email });
         if (!user) {
-            return res.status(401).json({ message: 'Adresse email ou mot de passe incorrect.' });
+            return res
+                .status(401)
+                .json({ message: "Adresse email ou mot de passe incorrect." });
         }
         const validPassword = yield bcrypt_1.default.compare(password, user.password);
         if (!validPassword) {
-            return res.status(401).json({ message: 'Adresse email ou mot de passe incorrect.' });
+            return res
+                .status(401)
+                .json({ message: "Adresse email ou mot de passe incorrect." });
         }
-        const token = jsonwebtoken_1.default.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
+        const token = jsonwebtoken_1.default.sign({ id: user._id, role: user.role }, JWT_SECRET, {
+            expiresIn: "1h",
+        });
         return res.status(200).json({ token });
     }
     catch (error) {
-        return res.status(500).json({ message: 'Erreur lors de la connexion.' });
+        return res.status(500).json({ message: "Erreur lors de la connexion." });
     }
 }));
 exports.default = auth;
